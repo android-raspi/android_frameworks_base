@@ -17,6 +17,7 @@
 package android.opengl;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.os.Trace;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -168,6 +169,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private final static boolean LOG_RENDERER = false;
     private final static boolean LOG_RENDERER_DRAW_FRAME = false;
     private final static boolean LOG_EGL = false;
+    private final static int EGL_DEPTH = Integer.parseInt(SystemProperties.get("egl.depth.value", "16"));
     /**
      * The renderer only renders
      * when the surface is created, or when {@link #requestRender} is called.
@@ -992,7 +994,7 @@ public class GLSurfaceView extends SurfaceView implements SurfaceHolder.Callback
      */
     private class SimpleEGLConfigChooser extends ComponentSizeChooser {
         public SimpleEGLConfigChooser(boolean withDepthBuffer) {
-            super(8, 8, 8, 0, withDepthBuffer ? 16 : 0, 0);
+            super(8, 8, 8, 0, withDepthBuffer ? EGL_DEPTH : 0, 0);
         }
     }
 
